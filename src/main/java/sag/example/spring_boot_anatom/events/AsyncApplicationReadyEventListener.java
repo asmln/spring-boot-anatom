@@ -19,7 +19,7 @@ public class AsyncApplicationReadyEventListener {
     @Async // Требуется @EnableAsync в конфигурации приложения
     @EventListener(ApplicationReadyEvent.class)
     public void appReady() {
-        IO.println("---\uD83D\uDC49 ApplicationReadyEvent.");
+        IO.println("---\uD83D\uDC49 ApplicationReadyEvent - старт приложения завершён! \uD83C\uDF89");
         IO.println("✅ Хорошее место для прогрева кэшей.");
         beanDestroyer.killBean();
     }
