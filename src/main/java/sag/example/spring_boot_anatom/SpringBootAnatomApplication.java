@@ -1,5 +1,6 @@
 package sag.example.spring_boot_anatom;
 
+import org.springframework.boot.Banner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableAsync;
@@ -9,7 +10,17 @@ import org.springframework.scheduling.annotation.EnableAsync;
 public class SpringBootAnatomApplication {
 
 	static void main(String[] args) {
-		SpringApplication.run(SpringBootAnatomApplication.class, args);
+		IO.println("---\uD83D\uDC49 SpringBootApplication main - самое начало старта.");
+		IO.println(
+                """
+                        Контекст Spring еще не создан.
+                        Можно задать проперти, тайм-зону, какие-то общие настройки приложения.
+                        Проверить окружение и выйти с ошибкой."""
+		);
+		// Можно просто вот так: SpringApplication.run(SpringBootAnatomApplication.class, args); но...
+		SpringApplication app = new SpringApplication(SpringBootAnatomApplication.class);
+		//app.setBannerMode(Banner.Mode.OFF); // Можно отключить красивый баннер ☹️
+		app.run(args);
 	}
 
 }
