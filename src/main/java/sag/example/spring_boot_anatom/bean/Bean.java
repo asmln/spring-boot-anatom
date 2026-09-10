@@ -13,17 +13,19 @@ import org.springframework.stereotype.Component;
 
 @LogLifecycle
 @Component("BeanForHisLifeCycleDissection")
-@Qualifier("QualifierForBeanForHisLifeCycleDissection")
+@Qualifier("qualifierForBeanForHisLifeCycleDissection")
 public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanNameAware
         , InitializingBean, DisposableBean {
     static {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 <=Bean Life Cycle=> static в бине.");
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 [Bean Life Cycle] static в бине.");
     }
+
+    private String beanName;
 
     private InjectedBean injectedBean;
 
     public Bean() {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 <=Bean Life Cycle=> Вызов конструктора.");
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 [Bean Life Cycle] Вызов конструктора.");
     }
 
     public InjectedBean getInjectedBean() {
@@ -32,42 +34,47 @@ public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanName
 
     @Autowired
     public void setInjectedBean(InjectedBean injectedBean) {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 <=Bean Life Cycle=> Autowired через set'тер.");
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 [Bean Life Cycle] Autowired через set'тер.");
         this.injectedBean = injectedBean;
     }
 
     @Override
     public void setBeanFactory(@NonNull BeanFactory beanFactory) throws BeansException {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 <=Bean Life Cycle=> setBeanFactory через BeanFactoryAware.");
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 [Bean Life Cycle] setBeanFactory через BeanFactoryAware.");
     }
 
     @Override
     public void setBeanName(@NonNull String name) {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 <=Bean Life Cycle=> setBeanName (%s) через BeanNameAware.".formatted(name));
+        beanName = name;
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 [Bean Life Cycle] setBeanName (%s) через BeanNameAware.".formatted(name));
     }
 
     @Override
     public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 <=Bean Life Cycle=> setApplicationContext через ApplicationContextAware.");
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 [Bean Life Cycle] setApplicationContext через ApplicationContextAware.");
     }
 
     @PostConstruct
     void postConstruct() {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 <=Bean Life Cycle=> @PostConstruct.");
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 [Bean Life Cycle] @PostConstruct.");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 <=Bean Life Cycle=> InitializingBean afterPropertiesSet.");
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA1 [Bean Life Cycle] InitializingBean afterPropertiesSet.");
     }
 
     @PreDestroy
     void preDestroy() {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA5 <=Bean Life Cycle=> @PreDestroy.");
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA5 [Bean Life Cycle] @PreDestroy.");
     }
 
     @Override
     public void destroy() throws Exception {
-        IO.println("-----\uD83E\uDED8 \uD83D\uDCA5 <=Bean Life Cycle=> DisposableBean destroy.");
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA5 [Bean Life Cycle] DisposableBean destroy.");
+    }
+
+    public String getBeanName() {
+        return beanName;
     }
 }
