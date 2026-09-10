@@ -10,7 +10,7 @@ public class AsyncApplicationReadyEventListener {
     @Async // Требуется @EnableAsync в конфигурации приложения
     @EventListener(ApplicationReadyEvent.class)
     public void appReady() {
-        IO.println("--- ApplicationReadyEvent.");
-        IO.println("Хорошее место для прогрева кэшей.");
+        IO.println("---\uD83D\uDC49 ApplicationReadyEvent.");
+        IO.println("✅ Хорошее место для прогрева кэшей.");
     }
 }
