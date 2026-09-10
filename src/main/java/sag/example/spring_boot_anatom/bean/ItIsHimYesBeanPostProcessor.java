@@ -18,7 +18,7 @@ public class ItIsHimYesBeanPostProcessor implements BeanPostProcessor, Ordered {
         // Проверяем, помечен ли класс нашей аннотацией
         if (bean.getClass().isAnnotationPresent(LogLifecycle.class)) {
             System.out.printf("-----\uD83E\uDED8\uD83D\uDCA1 [BPP postProcessBeforeInitialization] Инициализация бина (%s) запущена.%n", beanName);
-            System.out.println("[BPP postProcessBeforeInitialization] Тут можно сделать что-то перед инициализацией бина. Например сохранить бины определённого класса, пока они не прокси, для дальнейшей обработки.");
+            IO.println("✅[BPP postProcessBeforeInitialization] Тут можно сделать что-то перед инициализацией бина. Например сохранить бины определённого класса, пока они не прокси, для дальнейшей обработки.");
         }
         return bean; // Обязательно возвращаем объект (тот же или измененный)
     }
@@ -27,14 +27,14 @@ public class ItIsHimYesBeanPostProcessor implements BeanPostProcessor, Ordered {
     public Object postProcessAfterInitialization(Object bean, @NonNull String beanName) throws BeansException {
         if (bean.getClass().isAnnotationPresent(LogLifecycle.class)) {
             System.out.printf("-----\uD83E\uDED8\uD83D\uDCA1 [BPP postProcessAfterInitialization] Инициализация бина (%s) завершена.%n", beanName);
-            System.out.println("Тут можно в свой прокси завернуть.");
+            IO.println("✅[BPP postProcessAfterInitialization] Тут можно в свой прокси завернуть.");
         }
         return bean; // Обязательно возвращаем объект (тот же или измененный)
     }
 
     @Override
     public int getOrder() {
-        IO.println("---\uD83D\uDE31 [BPP Order::getOrder] Оу, кто-то потрогал мой порядок.");
+        IO.println("-----\uD83D\uDE31 [BPP Order::getOrder] Оу, кто-то потрогал мой порядок.");
         return 0;
     }
 }
