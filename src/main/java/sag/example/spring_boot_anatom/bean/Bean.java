@@ -9,10 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @LogLifecycle
-@Component("BeanForHisLifeCycleDissection")
+@Component("beanForHisLifeCycleDissection")
 @Qualifier("qualifierForBeanForHisLifeCycleDissection")
 public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanNameAware
         , InitializingBean, DisposableBean {
@@ -76,5 +77,10 @@ public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanName
 
     public String getBeanName() {
         return beanName;
+    }
+
+    @Async
+    public void doTheJobAsync() {
+        IO.println("Job done!");
     }
 }
