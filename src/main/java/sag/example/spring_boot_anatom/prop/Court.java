@@ -21,10 +21,10 @@ public class Court {
     @EventListener(ApplicationStartedEvent.class)
     public void sayIt() {
         IO.println();
-        IO.println("===== \uD83D\uDD0DЗапутанное дело о краже кораллов");
+        IO.println("===== \uD83D\uDD0DЗапутанное дело о краже кораллов:");
         catchTheThief.readOutTestimony();
-        IO.println("   *Попробуйте вывести разные версии показаний о краже кораллов в строке выше, не меняя текст в application.yaml.");
-        IO.println("   **Версий, как минимум, пять.");
+        IO.println("   *Попробуйте вывести разные версии показаний о краже кораллов в строке выше, не меняя сами текстовые строки.");
+        IO.println("   **Как минимум пять имён!");
         IO.println("=====");
         IO.println();
     }

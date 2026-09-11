@@ -32,8 +32,8 @@ public class BeanDestroyer {
             // Уничтожаем инстанс бина
             beanFactory.destroySingleton(beanName);
             // Полностью удаляем описание бина (BeanDefinition)
-            beanFactory.removeBeanDefinition(beanName);
-            System.out.printf("-----\uD83D\uDCA5Бин %s успешно уничтожен и имя его забыто.%n", beanName);
+            //beanFactory.removeBeanDefinition(beanName); // Из-за этого иногда вываливается исключение во время дальнейшего закрытия контекста
+            System.out.printf("-----\uD83D\uDCA5Бин %s успешно уничтожен.%n", beanName);
         } else {
             System.out.printf("-----\uD83E\uDDD0Бин %s не найден.%n", beanName);
         }

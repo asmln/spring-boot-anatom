@@ -13,10 +13,12 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 @LogLifecycle
-@Component("beanForHisLifeCycleDissection")
+@Component(Bean.NAME)
 @Qualifier("qualifierForBeanForHisLifeCycleDissection")
 public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanNameAware
         , InitializingBean, DisposableBean {
+
+    public static final String NAME = "beanForHisLifeCycleDissection";
     static {
         IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] static в бине.");
     }
