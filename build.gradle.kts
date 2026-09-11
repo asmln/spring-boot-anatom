@@ -1,3 +1,6 @@
+import org.gradle.internal.classpath.Instrumented.systemProperty
+import org.springframework.boot.gradle.tasks.run.BootRun
+
 plugins {
 	java
 	id("org.springframework.boot") version "4.1.1"
@@ -25,4 +28,15 @@ dependencies {
 
 tasks.withType<Test> {
 	useJUnitPlatform()
+}
+
+tasks.withType<JavaExec> {
+	systemProperty("sun.stdout.encoding", "UTF-8")
+	systemProperty("sun.stderr.encoding", "UTF-8")
+	systemProperty("court.testimony", "Мавр у Клары украл кораллы.")
+	systemProperty("spring.profiles.active", "lie")
+}
+
+tasks.named<BootRun>("bootRun") {
+	environment("COURT_TESTIMONY", "Амдал у Клары украл кораллы.")
 }

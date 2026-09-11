@@ -1,3 +1,5 @@
+court.testimony: Я вам ничего не скажу!
+
 spring:
   application:
     name: spring-boot-anatom
