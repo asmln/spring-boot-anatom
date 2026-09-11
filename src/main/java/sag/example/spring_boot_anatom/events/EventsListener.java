@@ -37,9 +37,10 @@ public class EventsListener {
         beanDestroyer.killBean();
     }
 
-    @EventListener(ContextClosedEvent.class)
-    public void appContextClosedEvent() {
-        IO.println("---\uD83D\uDC13\uD83D\uDD2AContextClosedEvent - контекст закрывается. Бины еще живы, но процесс уничтожения начался.");
-        IO.println("   ✅Можно прологировать завершение работы, очистить ресурсы.");
-    }
+//    Если этот обработчик здесь добавить, тогда почему-то Spring пытается заинжектить Bean, который уже убит.
+//    @EventListener(ContextClosedEvent.class)
+//    public void appContextClosedEvent() {
+//        IO.println("---\uD83D\uDC13\uD83D\uDD2AContextClosedEvent - контекст закрывается. Бины еще живы, но процесс уничтожения начался.");
+//        IO.println("   ✅Можно прологировать завершение работы, очистить ресурсы.");
+//    }
 }
