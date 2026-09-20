@@ -13,7 +13,7 @@ public class TadamBeanFactoryPostProcessor implements BeanFactoryPostProcessor {
     public TadamBeanFactoryPostProcessor() {
         IO.println("---\uD83C\uDFED[BFPP] Создание кастомного BeanFactoryPostProcessor.");
         IO.println("   ✅[BFPP] Штука, которая работает с BeanDefinition (описаниями бинов).");
-        IO.println("   Такая же штуковина отвечает за то, чтобы подготовить превращение строчки @Value(\"${server.port}\") в реальный порт 8080.");
+        IO.println("   [BFPP] BeanFactoryPostProcessor должен взаимодействовать только с объектами BeanDefinition. Внутри него категорически нельзя ❌ запрашивать готовые бины из контекста.");
     }
 
     @Override
