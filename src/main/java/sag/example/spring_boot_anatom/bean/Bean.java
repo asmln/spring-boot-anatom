@@ -26,9 +26,11 @@ public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanName
 
     private String beanName;
     private InjectedBean injectedBean;
+    private final BornToBeDestroyed bornToBeDestroyed;
     private String value;
 
-    public Bean() {
+    public Bean(BornToBeDestroyed bornToBeDestroyed) {
+        this.bornToBeDestroyed = bornToBeDestroyed;
         IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] Вызов конструктора.");
     }
 
