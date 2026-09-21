@@ -40,24 +40,18 @@ public class SingletonBean {
                 "   \uD83E\uDE84[Prototype Injection] Синглтоновый Прототип - один экземпляр прототипа на всё время жизни синглтона-хозяина: %s."
                         .formatted(noPrototypeBean)
         );
-        Stream.of(1,2).forEach(_ -> {
-            IO.println(
-                    "   \uD83E\uDE84[Prototype Injection] Каждый раз новый прототип через context (но так лучше не делать): %s."
-                            .formatted(context.getBean(PrototypeBean.class))
-            );
-        });
-        Stream.of(1,2).forEach(_ -> {
-            IO.println(
-                    "   \uD83E\uDE84[Prototype Injection] Каждый раз новый прототип через @Lookup: %s."
-                            .formatted(getNewPrototypeBean())
-            );
-        });
-        Stream.of(1,2).forEach(_ -> {
-            IO.println(
-                    "   \uD83E\uDE84✅[Prototype Injection] Каждый раз новый прототип через ObjectProvider: %s."
-                            .formatted(prototypeBeanProvider.getObject())
-            );
-        });
+        Stream.of(1,2).forEach(_ -> IO.println(
+                "   \uD83E\uDE84[Prototype Injection] Каждый раз новый прототип через context (но так лучше не делать): %s."
+                        .formatted(context.getBean(PrototypeBean.class))
+        ));
+        Stream.of(1,2).forEach(_ -> IO.println(
+                "   \uD83E\uDE84[Prototype Injection] Каждый раз новый прототип через @Lookup: %s."
+                        .formatted(getNewPrototypeBean())
+        ));
+        Stream.of(1,2).forEach(_ -> IO.println(
+                "   \uD83E\uDE84✅[Prototype Injection] Каждый раз новый прототип через ObjectProvider: %s."
+                        .formatted(prototypeBeanProvider.getObject())
+        ));
         IO.println("=====\n");
     }
 }
