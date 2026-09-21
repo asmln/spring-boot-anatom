@@ -13,6 +13,7 @@ public class TadamBeanDefinitionRegistryPostProcessor implements BeanDefinitionR
         IO.println("---\uD83C\uDFED[BDRPP (BFPP)] Создание кастомного BeanDefinitionRegistryPostProcessor (это реализация [BFPP]).");
         IO.println("   ✅[BDRPP (BFPP)] Штука, которая работает с BeanDefinition и может регистрировать новые BeanDefinition в методе postProcessBeanDefinitionRegistry.");
         IO.println("   [BDRPP (BFPP)] BeanDefinitionRegistryPostProcessor должен взаимодействовать только с объектами BeanDefinition. Внутри него категорически нельзя ❌ запрашивать готовые бины из контекста.");
+        IO.println("   ✅[BDRPP (BFPP)] Хорошее место для логирования BeanDefinition бинов, которые в этом приложении создаются (в методе postProcessBeanDefinitionRegistry).");
     }
 
     @Override
