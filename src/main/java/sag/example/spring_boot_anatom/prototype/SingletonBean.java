@@ -27,8 +27,9 @@ public class SingletonBean {
     }
 
     @Lookup
+    // ❗Метод не должен быть private
     PrototypeBean getNewPrototypeBean() {
-        IO.println("\uD83E\uDE84[Prototype Injection] Делаем что угодно, этот код не вызовется. Spring переопределит метод для выдачи прототипов.");
+        IO.println("\uD83E\uDE84[Prototype Injection] Этот код не вызовется. Spring переопределит метод для выдачи прототипов.");
         return null;
     }
 
@@ -43,6 +44,12 @@ public class SingletonBean {
             IO.println(
                     "   \uD83E\uDE84[Prototype Injection] Каждый раз новый прототип через context (но так лучше не делать): %s."
                             .formatted(context.getBean(PrototypeBean.class))
+            );
+        });
+        Stream.of(1,2).forEach(_ -> {
+            IO.println(
+                    "   \uD83E\uDE84[Prototype Injection] Каждый раз новый прототип через @Lookup: %s."
+                            .formatted(getNewPrototypeBean())
             );
         });
         Stream.of(1,2).forEach(_ -> {
