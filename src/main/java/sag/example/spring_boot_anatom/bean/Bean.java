@@ -7,6 +7,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.Async;
@@ -24,8 +25,8 @@ public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanName
     }
 
     private String beanName;
-
     private InjectedBean injectedBean;
+    private String value;
 
     public Bean() {
         IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] Вызов конструктора.");
@@ -84,5 +85,11 @@ public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanName
     @Async
     public void theFinalWord(String text) {
         IO.println("-----\uD83E\uDED8\uD83D\uDE31 Я должен успеть сообщить тебе это: " + text);
+    }
+
+    @Value("${lifecycle.value}")
+    public void setValue(String value) {
+        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] Внедрение Value.");
+        this.value = value;
     }
 }
