@@ -1,11 +1,8 @@
 package sag.example.spring_boot_anatom.prop;
 
-import org.springframework.boot.availability.AvailabilityChangeEvent;
-import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.event.ContextClosedEvent;
 import org.springframework.context.event.EventListener;
 
 @Configuration
