@@ -22,7 +22,7 @@ public class ItIsHimYesBeanPostProcessor implements BeanPostProcessor {
     public Object postProcessBeforeInitialization(Object bean, @NonNull String beanName) throws BeansException {
         // Проверяем, помечен ли класс нашей аннотацией
         if (bean.getClass().isAnnotationPresent(LogLifecycle.class)) {
-            System.out.printf("-----\uD83E\uDED8\uD83D\uDCA1[BPP postProcessBeforeInitialization] Инициализация бина (%s) запущена.%n", beanName);
+            System.out.printf("-----\uD83E\uDED8\uD83D\uDCA1[BPP postProcessBeforeInitialization] Инициализация бина (%s) вот-вот начнётся, следите за развитием событий!%n", beanName);
             IO.println("     ✅[BPP postProcessBeforeInitialization] Тут можно сделать что-то перед инициализацией бина.");
             IO.println("     Например сохранить класс бина, пока он не прокси, а в postProcessAfterInitialization по этому классу (через AopUtils.getTargetClass(bean)) поймать нужный бин.");
             IO.println("     Или можно попробовать настроить порядок нашего BPP и postProcessAfterInitialization выполнится до проксирования.");
