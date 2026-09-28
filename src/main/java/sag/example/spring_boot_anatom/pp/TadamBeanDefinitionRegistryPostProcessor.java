@@ -1,4 +1,4 @@
-package sag.example.spring_boot_anatom.bpp;
+package sag.example.spring_boot_anatom.pp;
 
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanDefinition;

@@ -14,7 +14,7 @@ public class ApplicationEnvironmentPreparedEventListener implements ApplicationL
     @Override
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
         IO.println("---\uD83D\uDC25ApplicationEnvironmentPreparedEvent - среда окружения (Environment) уже создана и известны активные профили, но контекст ещё не создан.");
-        IO.println("   ✅Можно подгрузить что-то в Environment или всё там основательно запутать \uD83D\uDE09");
+        IO.println("   ✅Можно добавить что-то в ConfigurableEnvironment или всё там основательно запутать \uD83D\uDE09");
         ConfigurableEnvironment env = event.getEnvironment();
         // Получим профили
         List<String> activeProfiles = Arrays.asList(env.getActiveProfiles());
@@ -26,9 +26,9 @@ public class ApplicationEnvironmentPreparedEventListener implements ApplicationL
         } else {
             return;
         }
-        // Новый источник с высшим приоритетом перекроет значение court.testimony
+        // Новый источник с высшим приоритетом (addFirst) перекроет значение court.testimony
         env.getPropertySources()
-                .addFirst(new MapPropertySource("externalConfigOverrides", overrides));
+                .addFirst(new MapPropertySource("court-application-environment-prepared-event-listener", overrides));
     }
 
     @Override
