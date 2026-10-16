@@ -6,6 +6,8 @@ import org.springframework.boot.context.event.ApplicationStartedEvent;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import sag.example.spring_boot_anatom.util.Anatom;
+import sag.example.spring_boot_anatom.util.Slice;
 
 import java.util.stream.Stream;
 
@@ -29,29 +31,29 @@ public class SingletonBean {
     @Lookup
     // ❗Метод не должен быть private
     PrototypeBean getNewPrototypeBean() {
-        IO.println("\uD83E\uDE84[Prototype Injection] Этот код не вызовется. Spring переопределит метод для выдачи прототипов.");
+        Anatom.out(Slice.INJECTION, "\uD83E\uDE84[Prototype Injection] Этот код не вызовется. Spring переопределит метод для выдачи прототипов.");
         return null;
     }
 
     @EventListener(ApplicationStartedEvent.class)
     public void showMeYourPrototypes() throws InterruptedException {
-        IO.println("===== \uD83E\uDE84[Prototype Injection]");
-        IO.println(
+        Anatom.out(Slice.INJECTION, "===== \uD83E\uDE84[Prototype Injection]");
+        Anatom.out(Slice.INJECTION,
                 "   \uD83E\uDE84[Prototype Injection] Синглтоновый Прототип - один экземпляр прототипа на всё время жизни синглтона-хозяина: %s."
                         .formatted(noPrototypeBean)
         );
-        Stream.of(1,2).forEach(_ -> IO.println(
+        Stream.of(1,2).forEach(_ -> Anatom.out(Slice.INJECTION,
                 "   \uD83E\uDE84[Prototype Injection] Каждый раз новый прототип через context (но так лучше не делать): %s."
                         .formatted(context.getBean(PrototypeBean.class))
         ));
-        Stream.of(1,2).forEach(_ -> IO.println(
+        Stream.of(1,2).forEach(_ -> Anatom.out(Slice.INJECTION,
                 "   \uD83E\uDE84[Prototype Injection] Каждый раз новый прототип через @Lookup: %s."
                         .formatted(getNewPrototypeBean())
         ));
-        Stream.of(1,2).forEach(_ -> IO.println(
+        Stream.of(1,2).forEach(_ -> Anatom.out(Slice.INJECTION,
                 "   \uD83E\uDE84✅[Prototype Injection] Каждый раз новый прототип через ObjectProvider: %s."
                         .formatted(prototypeBeanProvider.getObject())
         ));
-        IO.println("=====\n");
+        Anatom.out(Slice.INJECTION, "=====\n");
     }
 }

@@ -12,6 +12,8 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
+import sag.example.spring_boot_anatom.util.Anatom;
+import sag.example.spring_boot_anatom.util.Slice;
 
 @LogLifecycle
 @Component(Bean.NAME)
@@ -21,7 +23,7 @@ public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanName
 
     public static final String NAME = "beanForHisLifeCycleDissection";
     static {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] static в бине.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] static в бине.");
     }
 
     private String beanName;
@@ -31,7 +33,7 @@ public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanName
 
     public Bean(BornToBeDestroyed bornToBeDestroyed) {
         this.bornToBeDestroyed = bornToBeDestroyed;
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] Вызов конструктора.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] Вызов конструктора.");
     }
 
     public InjectedBean getInjectedBean() {
@@ -40,44 +42,44 @@ public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanName
 
     @Autowired
     public void setInjectedBean(InjectedBean injectedBean) {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] Autowired через set'тер.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] Autowired через set'тер.");
         this.injectedBean = injectedBean;
     }
 
     @Override
     public void setBeanFactory(@NonNull BeanFactory beanFactory) throws BeansException {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] setBeanFactory через BeanFactoryAware.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] setBeanFactory через BeanFactoryAware.");
     }
 
     @Override
     public void setBeanName(@NonNull String name) {
         beanName = name;
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] setBeanName (%s) через BeanNameAware.".formatted(name));
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] setBeanName (%s) через BeanNameAware.".formatted(name));
     }
 
     @Override
     public void setApplicationContext(@NonNull ApplicationContext applicationContext) throws BeansException {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] setApplicationContext через ApplicationContextAware.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] setApplicationContext через ApplicationContextAware.");
     }
 
     @PostConstruct
     void postConstruct() {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] @PostConstruct.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] @PostConstruct.");
     }
 
     @Override
     public void afterPropertiesSet() throws Exception {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] InitializingBean afterPropertiesSet.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] InitializingBean afterPropertiesSet.");
     }
 
     @PreDestroy
     void preDestroy() {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA5[Bean Life Cycle] @PreDestroy.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA5[Bean Life Cycle] @PreDestroy.");
     }
 
     @Override
     public void destroy() throws Exception {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA5[Bean Life Cycle] DisposableBean destroy.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA5[Bean Life Cycle] DisposableBean destroy.");
     }
 
     public String getBeanName() {
@@ -86,12 +88,12 @@ public class Bean implements ApplicationContextAware, BeanFactoryAware, BeanName
 
     @Async
     public void theFinalWord(String text) {
-        IO.println("-----\uD83E\uDED8\uD83D\uDE31 Я должен успеть сообщить тебе это: " + text);
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDE31 Я должен успеть сообщить тебе это: " + text);
     }
 
     @Value("${lifecycle.value}")
     public void setValue(String value) {
-        IO.println("-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] Внедрение Value.");
+        Anatom.out(Slice.BEAN, "-----\uD83E\uDED8\uD83D\uDCA1[Bean Life Cycle] Внедрение Value.");
         this.value = value;
     }
 }

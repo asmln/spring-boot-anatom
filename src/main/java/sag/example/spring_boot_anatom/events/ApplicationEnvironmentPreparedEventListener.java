@@ -4,6 +4,8 @@ import org.springframework.boot.context.event.ApplicationEnvironmentPreparedEven
 import org.springframework.context.ApplicationListener;
 import org.springframework.core.env.ConfigurableEnvironment;
 import org.springframework.core.env.MapPropertySource;
+import sag.example.spring_boot_anatom.util.Anatom;
+import sag.example.spring_boot_anatom.util.Slice;
 
 import java.util.Arrays;
 import java.util.HashMap;
@@ -13,8 +15,8 @@ import java.util.Map;
 public class ApplicationEnvironmentPreparedEventListener implements ApplicationListener<ApplicationEnvironmentPreparedEvent> {
     @Override
     public void onApplicationEvent(ApplicationEnvironmentPreparedEvent event) {
-        IO.println("---\uD83D\uDC25ApplicationEnvironmentPreparedEvent - среда окружения (Environment) уже создана и известны активные профили, но контекст ещё не создан.");
-        IO.println("   ✅Можно добавить что-то в ConfigurableEnvironment или всё там основательно запутать \uD83D\uDE09");
+        Anatom.out(List.of(Slice.SPRING, Slice.EVENT), "---\uD83D\uDC25ApplicationEnvironmentPreparedEvent - среда окружения (Environment) уже создана и известны активные профили, но контекст ещё не создан.");
+        Anatom.out(List.of(Slice.SPRING, Slice.EVENT), "   ✅Можно добавить что-то в ConfigurableEnvironment или всё там основательно запутать \uD83D\uDE09");
         ConfigurableEnvironment env = event.getEnvironment();
         // Получим профили
         List<String> activeProfiles = Arrays.asList(env.getActiveProfiles());

@@ -5,6 +5,8 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Description;
 import org.springframework.stereotype.Service;
+import sag.example.spring_boot_anatom.util.Anatom;
+import sag.example.spring_boot_anatom.util.Slice;
 
 // Для реализации уничтожения бина
 @Service
@@ -33,9 +35,9 @@ public class BeanDestroyer {
             beanFactory.destroySingleton(beanName);
             // Полностью удаляем описание бина (BeanDefinition)
             beanFactory.removeBeanDefinition(beanName);
-            System.out.printf("-----\uD83D\uDCA5Бин %s успешно уничтожен и имя его забыто.%n", beanName);
+            Anatom.out(Slice.BEAN, "-----\uD83D\uDCA5Бин %s успешно уничтожен и имя его забыто.".formatted(beanName));
         } else {
-            System.out.printf("-----\uD83E\uDDD0Бин %s не найден.%n", beanName);
+            Anatom.out(Slice.BEAN, "-----\uD83E\uDDD0Бин %s не найден.".formatted(beanName));
         }
     }
 }
